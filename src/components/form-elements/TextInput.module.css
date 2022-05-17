@@ -1,3 +1,7 @@
+label {
+  color: var(--color-blue);
+}
+
 .input--error {
   color: red;
 }
