@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
+/* form specific formatting */
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form-group label {
+  flex: none;
+  display: block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1em;
+}
+.form-group label.right-inline {
+  text-align: right;
+  padding-right: 8px;
+  padding-left: 10px;
+  width: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form-group .input-control {
+  flex: 1 1 auto;
+  display: block;
+  margin-bottom: 10px;
+  margin-right: 8px;
+  padding: 4px;
+  margin-top: -4px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.input-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.label--err {
+  color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+button {
+  padding: 5px 15px;
+  margin: 5px;
+  min-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .form-group {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .form-group .input-control {
+    margin-top: 2px;
+  }
+  .form-group label.right-inline {
+    text-align: left;
+    padding-right: 0;
+    padding-left: 0;
   }
 }
