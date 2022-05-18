@@ -1,0 +1,10 @@
+.step-header {
+  background-color: var(--color-blue);
+  color: white;
+  border-radius: 5px;
+}
+
+.step-header h1,
+h2 {
+  text-align: center;
+}

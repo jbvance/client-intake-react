@@ -1,5 +1,11 @@
-import { useRef, useState, useContext } from 'react';
-import { Formik, Form, FormikProps } from 'formik';
+import { useEffect, useRef, useState, useContext, SyntheticEvent } from 'react';
+import {
+  Formik,
+  useFormikContext,
+  Form,
+  FormikProps,
+  FormikValues
+} from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { clientInfoActions } from '../store/client-info-slice';
@@ -8,12 +14,14 @@ import Select from './form-elements/Select';
 import ErrorSummary from './form-elements/ErrorSummary';
 import { RootState } from '../store';
 import { IClientInfo } from '../store/client-info-slice';
+import StepHeader from './StepHeader';
 
 import { FormContext } from '../App';
 
 const ClientInfo = (props: any) => {
   const dispatch = useDispatch();
   const { activeStepIndex, setActiveStepIndex } = useContext(FormContext);
+  const [isMarried, setIsMarried] = useState<string>('');
 
   const initialState: IClientInfo = useSelector(
     (state: RootState) => state.clientInfo
@@ -22,6 +30,14 @@ const ClientInfo = (props: any) => {
   type FormValues = {};
   const formRef = useRef<FormikProps<FormValues>>(null);
 
+  const UpdateMaritalStatus = () => {
+    const { values } = useFormikContext<IClientInfo>();
+    useEffect(() => {
+      console.log(values.married);
+      setIsMarried(values.married);
+    }, [values.married]);
+    return null;
+  };
   const handleSubmit = async () => {
     // Try to submit the form
     setUserErrors(null);
@@ -38,12 +54,9 @@ const ClientInfo = (props: any) => {
       setActiveStepIndex(activeStepIndex + 1);
     }
   };
-
   return (
     <>
-      <div className="step-header">
-        <h1>Client Info</h1>
-      </div>
+      <StepHeader header="Client Information" />
       <Formik
         innerRef={formRef}
         initialValues={{
@@ -198,6 +211,7 @@ const ClientInfo = (props: any) => {
                 <option value="N">No</option>
               </Select>
             </div>
+            <UpdateMaritalStatus />
           </div>
 
           {userErrors && Object.keys(userErrors).length && (

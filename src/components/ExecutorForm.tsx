@@ -1,7 +1,12 @@
 import React from 'react';
+import StepHeader from './StepHeader';
 
 const ExecutorForm = () => {
-  return <div>Executor Form</div>;
+  return (
+    <>
+      <StepHeader header="Executor" />
+    </>
+  );
 };
 
 export default ExecutorForm;
