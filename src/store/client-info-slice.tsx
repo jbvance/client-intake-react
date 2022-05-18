@@ -1,8 +1,8 @@
-import { Dispatch } from 'redux';
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
 import store from './';
+import { string } from 'yup';
 
 export interface IClientInfo {
   firstName: string;
@@ -16,7 +16,14 @@ export interface IClientInfo {
   phone: string;
   occupation?: string;
   employer?: string;
+  email: string;
   married: string;
+  spouseFirstName?: string;
+  spouseMiddleName?: string;
+  spouseLastName?: string;
+  spouseEmail?: string;
+  spouseOccupation?: string;
+  spouseEmployer?: string;
 }
 
 const initialClientInfo: IClientInfo = {
@@ -30,8 +37,15 @@ const initialClientInfo: IClientInfo = {
   county: '',
   phone: '',
   occupation: '',
+  email: '',
   employer: '',
-  married: ''
+  married: '',
+  spouseFirstName: '',
+  spouseMiddleName: '',
+  spouseLastName: '',
+  spouseEmail: '',
+  spouseOccupation: '',
+  spouseEmployer: '',
 };
 
 const initialState = { ...initialClientInfo };
@@ -41,8 +55,18 @@ const clientInfoSlice = createSlice({
   initialState,
   reducers: {
     updateClientInfo(state, action) {
-      Object.assign(state, action.payload);
-    }
+      const newState = { ...action.payload };
+      if (newState.married === 'N') {
+        newState.spouseFirstName = '';
+        newState.spouseMiddleName = '';
+        newState.spouseLastName = '';
+        newState.spouseOccupation = '';
+        newState.spouseEmployer = '';
+        newState.spouseEmail = '';
+      }
+      //console.log(newState);
+      Object.assign(state, newState);
+    },
     // addFavorite(state, action) {
     //   const newRecipe = action.payload;
     //   const existingFavorite = state.recipes.find(
@@ -67,7 +91,7 @@ const clientInfoSlice = createSlice({
     // setFavorites(state, action) {
     //   state.recipes = action.payload;
     // },
-  }
+  },
 });
 
 // export const getFavorites = (token: string) => {

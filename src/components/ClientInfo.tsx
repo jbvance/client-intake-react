@@ -4,7 +4,7 @@ import {
   useFormikContext,
   Form,
   FormikProps,
-  FormikValues
+  FormikValues,
 } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,9 +33,8 @@ const ClientInfo = (props: any) => {
   const UpdateMaritalStatus = () => {
     const { values } = useFormikContext<IClientInfo>();
     useEffect(() => {
-      console.log(values.married);
       setIsMarried(values.married);
-    }, [values.married]);
+    }, [values]);
     return null;
   };
   const handleSubmit = async () => {
@@ -48,6 +47,7 @@ const ClientInfo = (props: any) => {
     }
     // If form did not submit because of errors, handle here
     const errors = await formRef.current?.validateForm(formRef.current.values);
+    //console.log(errors);
     if (errors && Object.keys(errors).length > 0) {
       setUserErrors(errors);
     } else {
@@ -57,10 +57,15 @@ const ClientInfo = (props: any) => {
   return (
     <>
       <StepHeader header="Client Information" />
+      <h3 style={{ textAlign: 'justify' }}>
+        NOTE: For ALL names on this questionnaire, please use the full legal
+        name or the name as you would prefer it to appear in your documents
+        (e.g., it is most common to use full first names with middle initials)
+      </h3>
       <Formik
         innerRef={formRef}
         initialValues={{
-          ...initialState
+          ...initialState,
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -83,12 +88,39 @@ const ClientInfo = (props: any) => {
           phone: Yup.string().required('Phone No. is required'),
           occupation: Yup.string(),
           employer: Yup.string(),
+          email: Yup.string()
+            .required('Email is required')
+            .email('Invalid email addres'),
           married: Yup.string()
             .required('Select a marital status')
-            .oneOf(['Y', 'N'])
+            .oneOf(['Y', 'N']),
+          spouseFirstName: Yup.string().when('married', {
+            is: 'Y',
+            then: (schema) => schema.required('Spouse first name is required'),
+          }),
+          spouseMiddleName: Yup.string().when('married', {
+            is: 'Y',
+            then: (schema) => schema,
+          }),
+          spouseLastName: Yup.string().when('married', {
+            is: 'Y',
+            then: (schema) => schema.required('Spouse last name is required'),
+          }),
+          spouseEmail: Yup.string().when('married', {
+            is: 'Y',
+            then: (schema) => schema,
+          }),
+          spouseOccupation: Yup.string().when('married', {
+            is: 'Y',
+            then: (schema) => schema,
+          }),
+          spouseEmployer: Yup.string().when('married', {
+            is: 'Y',
+            then: (schema) => schema,
+          }),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('VALUES', values);
+          //console.log('VALUES', values);
           handleSubmit();
           dispatch(clientInfoActions.updateClientInfo({ ...values }));
         }}
@@ -186,6 +218,15 @@ const ClientInfo = (props: any) => {
           <div className="form-group">
             <div className="input-group">
               <TextInput
+                label="Email"
+                name="email"
+                type="text"
+                placeholder="Email"
+                inputCssClass="input-control"
+              />
+            </div>
+            <div className="input-group">
+              <TextInput
                 label="Occupation"
                 name="occupation"
                 type="text"
@@ -213,6 +254,69 @@ const ClientInfo = (props: any) => {
             </div>
             <UpdateMaritalStatus />
           </div>
+          {isMarried === 'Y' && (
+            <>
+              {' '}
+              <div className="form-group">
+                <div className="input-group">
+                  <TextInput
+                    label="Spouse First Name"
+                    name="spouseFirstName"
+                    type="text"
+                    placeholder="Spouse's First Name"
+                    inputCssClass="input-control"
+                  />
+                </div>
+                <div className="input-group">
+                  <TextInput
+                    label="Spouse Middle Name"
+                    name="spouseMiddleName"
+                    type="text"
+                    placeholder="Spouse's Middle name or initial"
+                    inputCssClass="input-control"
+                  />
+                </div>
+                <div className="input-group">
+                  <TextInput
+                    label="Spouse Last Name"
+                    name="spouseLastName"
+                    type="text"
+                    placeholder="Spouse's Last name"
+                    inputCssClass="input-control"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div className="input-group">
+                  <TextInput
+                    label="Spouse Email"
+                    name="spouseEmail"
+                    type="text"
+                    placeholder="Spouse's Email"
+                    inputCssClass="input-control"
+                  />
+                </div>
+                <div className="input-group">
+                  <TextInput
+                    label="Spouse Occupation"
+                    name="spouseOccupation"
+                    type="text"
+                    placeholder="Spouse's Occupation"
+                    inputCssClass="input-control"
+                  />
+                </div>
+                <div className="input-group">
+                  <TextInput
+                    label="Spouse Employer"
+                    name="spouseEmployer"
+                    type="text"
+                    placeholder="Spouse's Employer"
+                    inputCssClass="input-control"
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           {userErrors && Object.keys(userErrors).length && (
             <ErrorSummary errors={userErrors} />

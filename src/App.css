@@ -23,6 +23,7 @@
 
 .form-group .input-control {
   /* flex: 1 1 auto; */
+  line-height: 1.5rem;
   display: block;
   margin-bottom: 2px;
   margin-right: 8px;
