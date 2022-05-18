@@ -10,15 +10,20 @@ const MultiStepForm = () => {
 
   const props = {
     isFirst: activeStepIndex === 0,
-    isLast: activeStepIndex === steps.length - 1,
+    isLast: activeStepIndex === steps.length - 1
   };
 
   const stepComponents = [
-    <ClientInfo isFirst={props.isFirst} isLast={props.isLast} />,
-    <ExecutorForm />,
+    <ClientInfo isFirst={props.isFirst} id={steps[0]} />,
+    <ExecutorForm />
   ];
 
-  return <div>{stepComponents[activeStepIndex]}</div>;
+  return (
+    <div>
+      {stepComponents[activeStepIndex]}
+      <Footer id={steps[activeStepIndex]} {...props} />
+    </div>
+  );
 };
 
 export default MultiStepForm;

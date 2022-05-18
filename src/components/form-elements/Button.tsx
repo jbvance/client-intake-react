@@ -5,7 +5,7 @@ import './Button.css';
 
 interface IButtonProps {
   children: any;
-  type: 'button' | 'submit' | 'reset' | undefined;
+  type: 'button' | 'submit' | 'reset' | 'formik-submit' | undefined;
   danger?: boolean;
   disabled?: boolean;
   href?: string;
@@ -13,6 +13,7 @@ interface IButtonProps {
   size?: string;
   to?: string;
   onClick?: () => void;
+  form?: string;
 }
 
 const Button = (props: IButtonProps) => {
@@ -38,6 +39,19 @@ const Button = (props: IButtonProps) => {
       >
         {props.children}
       </Link>
+    );
+  }
+  if (props.type === 'formik-submit') {
+    return (
+      <input
+        className={`button button--${props.size || 'default'} ${
+          props.inverse && 'button--inverse'
+        } ${props.danger && 'button--danger'}`}
+        type="submit"
+        disabled={props.disabled}
+        value={props.children}
+        form={props.form}
+      />
     );
   }
   return (

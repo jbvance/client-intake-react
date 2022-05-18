@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clientInfoActions } from '../store/client-info-slice';
 import TextInput from './form-elements/TextInput';
 import Select from './form-elements/Select';
-import Button from './form-elements/Button';
 import ErrorSummary from './form-elements/ErrorSummary';
 import { RootState } from '../store';
 import { IClientInfo } from '../store/client-info-slice';
-import Footer from './Footer';
+
 import { FormContext } from '../App';
 
 const ClientInfo = (props: any) => {
@@ -48,7 +47,7 @@ const ClientInfo = (props: any) => {
       <Formik
         innerRef={formRef}
         initialValues={{
-          ...initialState,
+          ...initialState
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -73,25 +72,15 @@ const ClientInfo = (props: any) => {
           employer: Yup.string(),
           married: Yup.string()
             .required('Select a marital status')
-            .oneOf(['Y', 'N']),
-
-          // email: Yup.string()
-          //   .email('Invalid email address')
-          //   .required('Required'),
-          // acceptedTerms: Yup.boolean()
-          //   .required('Required')
-          //   .oneOf([true], 'You must accept the terms and conditions.'),
+            .oneOf(['Y', 'N'])
         })}
         onSubmit={(values, { setSubmitting }) => {
-          //console.log(values);
+          console.log('VALUES', values);
+          handleSubmit();
           dispatch(clientInfoActions.updateClientInfo({ ...values }));
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);
-          // }, 400);
         }}
       >
-        <Form>
+        <Form id={props.id}>
           <div className="form-group">
             <div className="input-group">
               <TextInput
@@ -218,11 +207,6 @@ const ClientInfo = (props: any) => {
           {/* <Button type="button" onClick={handleSubmit}>
             Submit
           </Button> */}
-          <Footer
-            isFirst={props.isFirst}
-            isLast={props.isLast}
-            onClick={handleSubmit}
-          />
         </Form>
       </Formik>
     </>

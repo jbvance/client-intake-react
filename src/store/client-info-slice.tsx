@@ -21,6 +21,7 @@ export interface IClientInfo {
 
 const initialClientInfo: IClientInfo = {
   firstName: '',
+  middleName: '',
   lastName: '',
   address: '',
   city: '',
@@ -30,7 +31,7 @@ const initialClientInfo: IClientInfo = {
   phone: '',
   occupation: '',
   employer: '',
-  married: '',
+  married: ''
 };
 
 const initialState = { ...initialClientInfo };
@@ -41,7 +42,7 @@ const clientInfoSlice = createSlice({
   reducers: {
     updateClientInfo(state, action) {
       Object.assign(state, action.payload);
-    },
+    }
     // addFavorite(state, action) {
     //   const newRecipe = action.payload;
     //   const existingFavorite = state.recipes.find(
@@ -66,7 +67,7 @@ const clientInfoSlice = createSlice({
     // setFavorites(state, action) {
     //   state.recipes = action.payload;
     // },
-  },
+  }
 });
 
 // export const getFavorites = (token: string) => {

@@ -45,9 +45,9 @@ const TextInput: React.FC<InputProps> = ({
         {...field}
         {...props}
       />
-      {/* {meta.touched && meta.error ? (
+      {meta.touched && meta.error ? (
         <div className={styles['input--error']}>{meta.error}</div>
-      ) : null} */}
+      ) : null}
     </>
   );
 };
