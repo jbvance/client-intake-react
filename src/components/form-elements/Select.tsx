@@ -17,15 +17,15 @@ const Select: React.FC<SelectProps> = ({ label, ...props }) => {
       <label
         htmlFor={props.id || props.name}
         className={`${
-          meta.touched && meta.error ? styles['select--invalid'] : ''
+          meta.touched && meta.error ? styles['select--error'] : ''
         }`}
       >
         {label}
       </label>
       <select {...field} {...props} className="minimal" />
-      {/* {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null} */}
+      {meta.touched && meta.error ? (
+        <div className={styles['select--error']}>{meta.error}</div>
+      ) : null}
     </div>
   );
 };
