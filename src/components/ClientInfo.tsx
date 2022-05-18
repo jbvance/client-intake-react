@@ -1,15 +1,24 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clientInfoActions } from '../store/client-info-slice';
 import TextInput from './form-elements/TextInput';
 import Select from './form-elements/Select';
 import Button from './form-elements/Button';
 import ErrorSummary from './form-elements/ErrorSummary';
+import { RootState } from '../store';
+import { IClientInfo } from '../store/client-info-slice';
+import Footer from './Footer';
+import { FormContext } from '../App';
 
-const ClientInfo = () => {
+const ClientInfo = (props: any) => {
   const dispatch = useDispatch();
+  const { activeStepIndex, setActiveStepIndex } = useContext(FormContext);
+
+  const initialState: IClientInfo = useSelector(
+    (state: RootState) => state.clientInfo
+  );
   const [userErrors, setUserErrors] = useState<Object | null>(null);
   type FormValues = {};
   const formRef = useRef<FormikProps<FormValues>>(null);
@@ -26,6 +35,8 @@ const ClientInfo = () => {
     const errors = await formRef.current?.validateForm(formRef.current.values);
     if (errors && Object.keys(errors).length > 0) {
       setUserErrors(errors);
+    } else {
+      setActiveStepIndex(activeStepIndex + 1);
     }
   };
 
@@ -37,18 +48,7 @@ const ClientInfo = () => {
       <Formik
         innerRef={formRef}
         initialValues={{
-          firstName: '',
-          lastName: '',
-          middleName: '',
-          address: '',
-          city: '',
-          state: '',
-          zip: '',
-          county: 'Harris',
-          phone: '555-555-5555',
-          occupation: 'Architect',
-          employer: 'Acme Architecture, LLC',
-          married: '',
+          ...initialState,
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -215,9 +215,14 @@ const ClientInfo = () => {
             <ErrorSummary errors={userErrors} />
           )}
 
-          <Button type="button" onClick={handleSubmit}>
+          {/* <Button type="button" onClick={handleSubmit}>
             Submit
-          </Button>
+          </Button> */}
+          <Footer
+            isFirst={props.isFirst}
+            isLast={props.isLast}
+            onClick={handleSubmit}
+          />
         </Form>
       </Formik>
     </>

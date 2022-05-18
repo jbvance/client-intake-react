@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import store from './';
 
-interface IClientInfo {
+export interface IClientInfo {
   firstName: string;
   middleName?: string;
   lastName: string;
