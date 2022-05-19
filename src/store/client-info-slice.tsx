@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
 
-import store from './';
-import { string } from 'yup';
-
 export interface IClientInfo {
   firstName: string;
   middleName?: string;
@@ -26,20 +23,42 @@ export interface IClientInfo {
   spouseEmployer?: string;
 }
 
+// const initialClientInfo: IClientInfo = {
+//   firstName: '',
+//   middleName: '',
+//   lastName: '',
+//   address: '',
+//   city: '',
+//   state: '',
+//   zip: '',
+//   county: '',
+//   phone: '',
+//   occupation: '',
+//   email: '',
+//   employer: '',
+//   married: '',
+//   spouseFirstName: '',
+//   spouseMiddleName: '',
+//   spouseLastName: '',
+//   spouseEmail: '',
+//   spouseOccupation: '',
+//   spouseEmployer: '',
+// };
+
 const initialClientInfo: IClientInfo = {
-  firstName: '',
-  middleName: '',
-  lastName: '',
-  address: '',
-  city: '',
-  state: '',
-  zip: '',
-  county: '',
-  phone: '',
-  occupation: '',
-  email: '',
-  employer: '',
-  married: '',
+  firstName: 'Jason',
+  middleName: 'B.',
+  lastName: 'Vance',
+  address: '123 Main St.',
+  city: 'Houston',
+  state: 'TX',
+  zip: '77002',
+  county: 'Harris',
+  phone: '(713) 555-1234',
+  occupation: 'Attorney',
+  email: 'test@test.com',
+  employer: 'Vance Law Firm',
+  married: 'N',
   spouseFirstName: '',
   spouseMiddleName: '',
   spouseLastName: '',
