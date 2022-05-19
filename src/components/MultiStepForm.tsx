@@ -3,10 +3,11 @@ import ClientInfo from './ClientInfo';
 import { FormContext } from '../App';
 import Footer from './Footer';
 import ExecutorForm from './ExecutorForm';
+import ChildrenForm from './ChildrenForm';
 
 const MultiStepForm = () => {
   const { activeStepIndex } = useContext(FormContext);
-  const steps = ['client-info', 'executor'];
+  const steps = ['client-info', 'children', 'executor'];
 
   const props = {
     isFirst: activeStepIndex === 0,
@@ -15,6 +16,7 @@ const MultiStepForm = () => {
 
   const stepComponents = [
     <ClientInfo isFirst={props.isFirst} id={steps[0]} />,
+    <ChildrenForm {...props} id={steps[1]} />,
     <ExecutorForm />,
   ];
 

@@ -30,7 +30,7 @@ const Footer: React.FC<IFooterProps> = (props: any) => {
       </div>
       <div className={styles['footer-item']}>
         <Button type="formik-submit" form={props.id}>
-          {props.isFirst ? 'Next' : 'Submit'}
+          {isFirst ? 'Next' : isLast ? 'Submit' : 'Next'}
         </Button>
       </div>
     </div>

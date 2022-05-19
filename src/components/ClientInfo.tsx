@@ -1,11 +1,5 @@
-import { useEffect, useRef, useState, useContext, SyntheticEvent } from 'react';
-import {
-  Formik,
-  useFormikContext,
-  Form,
-  FormikProps,
-  FormikValues,
-} from 'formik';
+import { useEffect, useRef, useState, useContext } from 'react';
+import { Formik, useFormikContext, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { clientInfoActions } from '../store/client-info-slice';
@@ -15,7 +9,6 @@ import ErrorSummary from './form-elements/ErrorSummary';
 import { RootState } from '../store';
 import { IClientInfo } from '../store/client-info-slice';
 import StepHeader from './StepHeader';
-
 import { FormContext } from '../App';
 
 const ClientInfo = (props: any) => {
