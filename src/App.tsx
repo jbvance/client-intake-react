@@ -9,7 +9,7 @@ export const FormContext = createContext({
 
 function App() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
-  const steps = ['client-info', 'executor'];
+  const steps = ['client-info', 'children', 'executor'];
   return (
     <FormContext.Provider
       value={{ activeStepIndex, setActiveStepIndex, steps }}

@@ -16,6 +16,8 @@ const Footer: React.FC<IFooterProps> = (props: any) => {
   const isLast = activeStepIndex === steps.length - 1;
   const isFirst = activeStepIndex === 0;
 
+  console.log(steps);
+
   return (
     <div className={styles.footer}>
       <div className={styles['footer-item']}>
