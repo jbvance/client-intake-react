@@ -11,6 +11,7 @@ import { IClientInfo } from '../store/client-info-slice';
 import StepHeader from './StepHeader';
 import { FormContext } from '../App';
 import { AppDispatch } from '../store';
+import { updateClientInfo } from '../store/client-info-slice';
 
 const ClientInfo = (props: any) => {
   const dispatch: AppDispatch = useDispatch();
@@ -31,23 +32,6 @@ const ClientInfo = (props: any) => {
     }, [values]);
     return null;
   };
-  const handleSubmit = async () => {
-    // Try to submit the form
-    setUserErrors(null);
-    if (formRef.current?.values) {
-      formRef.current.handleSubmit();
-    } else {
-      return;
-    }
-    // If form did not submit because of errors, handle here
-    const errors = await formRef.current?.validateForm(formRef.current.values);
-    //console.log(errors);
-    if (errors && Object.keys(errors).length > 0) {
-      setUserErrors(errors);
-    } else {
-      setActiveStepIndex(activeStepIndex + 1);
-    }
-  };
   return (
     <>
       <StepHeader header="Client Information" />
@@ -57,7 +41,6 @@ const ClientInfo = (props: any) => {
         (e.g., it is most common to use full first names with middle initials)
       </h3>
       <Formik
-        innerRef={formRef}
         initialValues={{
           ...initialState
         }}
@@ -115,8 +98,8 @@ const ClientInfo = (props: any) => {
         })}
         onSubmit={(values, { setSubmitting }) => {
           //console.log('VALUES', values);
-          handleSubmit();
-          dispatch(clientInfoActions.updateClientInfo({ ...values }));
+          dispatch(updateClientInfo({ ...values }));
+          setActiveStepIndex(activeStepIndex + 1);
         }}
       >
         <Form id={props.id}>
