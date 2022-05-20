@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Dispatch } from 'redux';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface IClientInfo {
@@ -64,7 +65,7 @@ const initialClientInfo: IClientInfo = {
   spouseLastName: '',
   spouseEmail: '',
   spouseOccupation: '',
-  spouseEmployer: '',
+  spouseEmployer: ''
 };
 
 const initialState = { ...initialClientInfo };
@@ -85,7 +86,7 @@ const clientInfoSlice = createSlice({
       }
       //console.log(newState);
       Object.assign(state, newState);
-    },
+    }
     // addFavorite(state, action) {
     //   const newRecipe = action.payload;
     //   const existingFavorite = state.recipes.find(
@@ -110,8 +111,16 @@ const clientInfoSlice = createSlice({
     // setFavorites(state, action) {
     //   state.recipes = action.payload;
     // },
-  },
+  }
 });
+
+export const updateClientInfo = (clientInfo: IClientInfo) => {
+  return async (dispatch: Dispatch) => {
+    // TODO: call api to update client info before dispatching
+    // to redux
+    dispatch(clientInfoActions.updateClientInfo(clientInfo));
+  };
+};
 
 // export const getFavorites = (token: string) => {
 //   const axiosParams = {

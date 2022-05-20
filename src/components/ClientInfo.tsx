@@ -10,9 +10,10 @@ import { RootState } from '../store';
 import { IClientInfo } from '../store/client-info-slice';
 import StepHeader from './StepHeader';
 import { FormContext } from '../App';
+import { AppDispatch } from '../store';
 
 const ClientInfo = (props: any) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { activeStepIndex, setActiveStepIndex } = useContext(FormContext);
   const [isMarried, setIsMarried] = useState<string>('');
 
