@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState, useContext } from 'react';
-import { Formik, useFormikContext, Form, FormikProps } from 'formik';
+import { useEffect, useState, useContext } from 'react';
+import { Formik, useFormikContext, Form } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { clientInfoActions } from '../store/client-info-slice';
 import TextInput from './form-elements/TextInput';
 import Select from './form-elements/Select';
-import ErrorSummary from './form-elements/ErrorSummary';
 import { RootState } from '../store';
 import { IClientInfo } from '../store/client-info-slice';
 import StepHeader from './StepHeader';
@@ -21,9 +19,6 @@ const ClientInfo = (props: any) => {
   const initialState: IClientInfo = useSelector(
     (state: RootState) => state.clientInfo
   );
-  const [userErrors, setUserErrors] = useState<Object | null>(null);
-  type FormValues = {};
-  const formRef = useRef<FormikProps<FormValues>>(null);
 
   const UpdateMaritalStatus = () => {
     const { values } = useFormikContext<IClientInfo>();
@@ -294,14 +289,6 @@ const ClientInfo = (props: any) => {
               </div>
             </>
           )}
-
-          {userErrors && Object.keys(userErrors).length && (
-            <ErrorSummary errors={userErrors} />
-          )}
-
-          {/* <Button type="button" onClick={handleSubmit}>
-            Submit
-          </Button> */}
         </Form>
       </Formik>
     </>
