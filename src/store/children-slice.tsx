@@ -13,7 +13,18 @@ export interface IChild {
   spouseTwoOnly?: boolean;
 }
 
-const initialState: Array<IChild> = [];
+const initialState: Array<IChild> = [
+  {
+    firstName: 'Tom',
+    lastName: 'Smith',
+    middleName: 'L.',
+    address: '123 Main St.',
+    city: 'Houston',
+    state: 'TX',
+    zip: '77002',
+    phone: '555-555-5555'
+  }
+];
 
 const childrenSlice = createSlice({
   name: 'children',
@@ -21,8 +32,8 @@ const childrenSlice = createSlice({
   reducers: {
     addChild(state, action) {
       state = [...state, action.payload];
-    },
-  },
+    }
+  }
 });
 
 export const childrenActions = childrenSlice.actions;

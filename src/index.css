@@ -1,6 +1,7 @@
 html {
   --color-primary: rgb(43, 119, 201);
   --color-blue: rgb(43, 119, 201);
+  --color-danger: red;
 }
 body {
   margin: 0;

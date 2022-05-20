@@ -31,6 +31,10 @@
   margin-top: -4px;
 }
 
+input[type='number'] {
+  max-width: 100px;
+}
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -98,6 +102,25 @@ select.minimal:focus {
   background-repeat: no-repeat;
   border-color: var(--color-blue);
   outline: 0;
+}
+
+.person-info-container {
+  position: relative;
+  padding: 10px;
+  margin: 10px auto;
+  border: 1px solid gray;
+}
+
+.icon-button {
+  font-size: 1.2rem;
+}
+
+.icon-button:hover {
+  cursor: pointer;
+}
+
+.icon-button--danger {
+  color: var(--color-danger);
 }
 
 .container {
