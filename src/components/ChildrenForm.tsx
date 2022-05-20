@@ -200,18 +200,14 @@ const ChildrenForm: React.FC<IChildrenProps> = (props) => {
                               </div>
                             )}
                           </div>
-                          <div
-                            style={{
-                              position: 'absolute',
-                              right: 0,
-                              top: 0,
-                              margin: '2px'
-                            }}
-                          >
-                            <FaRegTrashAlt
+                          <div>
+                            <Button
                               onClick={() => arrayHelpers.remove(index)}
-                              className="icon-button icon-button--danger"
-                            />
+                              type="button"
+                              danger
+                            >
+                              Delete
+                            </Button>
                           </div>
                         </div>
 
