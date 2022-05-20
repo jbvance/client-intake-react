@@ -18,6 +18,7 @@ interface InputProps {
   disabled?: boolean;
   inputCssClass?: string;
   labelCssClass?: string;
+  min?: number;
 }
 
 const TextInput: React.FC<InputProps> = ({

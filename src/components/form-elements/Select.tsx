@@ -8,9 +8,10 @@ interface SelectProps {
   name: string;
   id?: string;
   children: React.ReactNode[];
+  labelStyle?: object;
 }
 
-const Select: React.FC<SelectProps> = ({ label, ...props }) => {
+const Select: React.FC<SelectProps> = ({ label, labelStyle, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <div>
@@ -19,6 +20,7 @@ const Select: React.FC<SelectProps> = ({ label, ...props }) => {
         className={`${
           meta.touched && meta.error ? styles['select--error'] : ''
         }`}
+        style={labelStyle}
       >
         {label}
       </label>

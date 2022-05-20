@@ -58,7 +58,7 @@ const ClientInfo = (props: any) => {
       <Formik
         innerRef={formRef}
         initialValues={{
-          ...initialState,
+          ...initialState
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -89,28 +89,28 @@ const ClientInfo = (props: any) => {
             .oneOf(['Y', 'N']),
           spouseFirstName: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema.required('Spouse first name is required'),
+            then: (schema) => schema.required('Spouse first name is required')
           }),
           spouseMiddleName: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema,
+            then: (schema) => schema
           }),
           spouseLastName: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema.required('Spouse last name is required'),
+            then: (schema) => schema.required('Spouse last name is required')
           }),
           spouseEmail: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema,
+            then: (schema) => schema
           }),
           spouseOccupation: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema,
+            then: (schema) => schema
           }),
           spouseEmployer: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema,
-          }),
+            then: (schema) => schema
+          })
         })}
         onSubmit={(values, { setSubmitting }) => {
           //console.log('VALUES', values);

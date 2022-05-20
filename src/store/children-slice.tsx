@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { AnyAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export interface IChild {
   firstName: string;
@@ -9,11 +9,10 @@ export interface IChild {
   state?: string;
   zip?: string;
   phone?: string;
-  spouseOneOnly?: boolean;
-  spouseTwoOnly?: boolean;
+  childParent?: string;
 }
 
-const initialState: Array<IChild> = [
+const initialState_TEST: Array<IChild> = [
   {
     firstName: 'Tom',
     lastName: 'Smith',
@@ -26,15 +25,27 @@ const initialState: Array<IChild> = [
   }
 ];
 
+const initialState: Array<IChild> = [];
+
 const childrenSlice = createSlice({
   name: 'children',
   initialState,
   reducers: {
     addChild(state, action) {
       state = [...state, action.payload];
+    },
+    setChildren(state, action) {
+      console.log(action.payload);
+      Object.assign(state, action.payload);
     }
   }
 });
+
+export const setChildren = (children: IChild[]) => {
+  return (dispatch: any) => {
+    dispatch(childrenActions.setChildren(children));
+  };
+};
 
 export const childrenActions = childrenSlice.actions;
 export default childrenSlice;
