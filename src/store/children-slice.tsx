@@ -1,4 +1,5 @@
-import { AnyAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { Dispatch } from 'redux';
+import { AnyAction, createSlice } from '@reduxjs/toolkit';
 
 export interface IChild {
   firstName: string;
@@ -42,7 +43,7 @@ const childrenSlice = createSlice({
 });
 
 export const setChildren = (children: IChild[]) => {
-  return (dispatch: any) => {
+  return async (dispatch: Dispatch) => {
     dispatch(childrenActions.setChildren(children));
   };
 };

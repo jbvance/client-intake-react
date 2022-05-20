@@ -12,6 +12,7 @@ import { childrenActions, setChildren } from '../store/children-slice';
 import { FormContext } from '../App';
 import IChild from '../store/children-slice';
 import Button from './form-elements/Button';
+import { AppDispatch } from '../store';
 
 interface IChildrenProps {
   id: string;
@@ -35,7 +36,7 @@ const ChildrenForm: React.FC<IChildrenProps> = (props) => {
   const isMarried = clientInfoState.married.toUpperCase() === 'Y';
   const { firstName, spouseFirstName } = clientInfoState;
   //console.log(initialState);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { activeStepIndex, setActiveStepIndex } = useContext(FormContext);
   const formId = props.id;
 
@@ -74,7 +75,7 @@ const ChildrenForm: React.FC<IChildrenProps> = (props) => {
         validationSchema={childValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log('VALUES', values);
-          dispatch(childrenActions.setChildren(values.children));
+          dispatch(setChildren(values.children));
           setActiveStepIndex(activeStepIndex + 1);
         }}
       >

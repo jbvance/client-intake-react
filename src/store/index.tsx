@@ -5,10 +5,11 @@ import childrenSlice from './children-slice';
 export const store = configureStore({
   reducer: {
     clientInfo: clientInfoSlice.reducer,
-    children: childrenSlice.reducer,
-  },
+    children: childrenSlice.reducer
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;
