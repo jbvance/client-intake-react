@@ -4,12 +4,12 @@ import MultiStepForm from './components/MultiStepForm';
 export const FormContext = createContext({
   activeStepIndex: 0,
   setActiveStepIndex: (prevState: number) => {},
-  steps: ['client-info', 'executor']
+  steps: ['client-info', 'executor'],
 });
 
 function App() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
-  const steps = ['client-info', 'children', 'executor'];
+  const steps = ['client-info', 'children', 'dpoa'];
   return (
     <FormContext.Provider
       value={{ activeStepIndex, setActiveStepIndex, steps }}

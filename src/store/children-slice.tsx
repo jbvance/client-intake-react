@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { AnyAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface IChild {
   firstName: string;
@@ -22,8 +22,8 @@ const initialState_TEST: Array<IChild> = [
     city: 'Houston',
     state: 'TX',
     zip: '77002',
-    phone: '555-555-5555'
-  }
+    phone: '555-555-5555',
+  },
 ];
 
 const initialState: Array<IChild> = [];
@@ -38,8 +38,8 @@ const childrenSlice = createSlice({
     setChildren(state, action) {
       console.log(action.payload);
       Object.assign(state, action.payload);
-    }
-  }
+    },
+  },
 });
 
 export const setChildren = (children: IChild[]) => {

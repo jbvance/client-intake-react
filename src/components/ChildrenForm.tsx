@@ -27,7 +27,7 @@ const newChild = {
   state: '',
   zip: '',
   age: '',
-  childParent: ''
+  childParent: '',
 };
 
 const ChildrenForm: React.FC<IChildrenProps> = (props) => {
@@ -35,7 +35,6 @@ const ChildrenForm: React.FC<IChildrenProps> = (props) => {
   const clientInfoState = useSelector((state: RootState) => state.clientInfo);
   const isMarried = clientInfoState.married.toUpperCase() === 'Y';
   const { firstName, spouseFirstName } = clientInfoState;
-  //console.log(initialState);
   const dispatch: AppDispatch = useDispatch();
   const { activeStepIndex, setActiveStepIndex } = useContext(FormContext);
   const formId = props.id;
@@ -53,9 +52,9 @@ const ChildrenForm: React.FC<IChildrenProps> = (props) => {
         age: Yup.string(),
         childParent: Yup.string()
           .oneOf(['client1', 'client2', 'both'], 'Select the parent(s)')
-          .required('Select the parent(s)')
+          .required('Select the parent(s)'),
       })
-    )
+    ),
   });
 
   return (
@@ -70,11 +69,11 @@ const ChildrenForm: React.FC<IChildrenProps> = (props) => {
       <div className="form-group"></div>
       <Formik
         initialValues={{
-          children: [...initialState]
+          children: [...initialState],
         }}
         validationSchema={childValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('VALUES', values);
+          //console.log('VALUES', values);
           dispatch(setChildren(values.children));
           setActiveStepIndex(activeStepIndex + 1);
         }}
@@ -99,7 +98,7 @@ const ChildrenForm: React.FC<IChildrenProps> = (props) => {
                           <FaPlusCircle
                             style={{
                               margin: '0 5px',
-                              verticalAlign: 'baseline'
+                              verticalAlign: 'baseline',
                             }}
                           />
                         </Button>
