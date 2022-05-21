@@ -19,6 +19,7 @@ interface InputProps {
   inputCssClass?: string;
   labelCssClass?: string;
   min?: number;
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 const TextInput: React.FC<InputProps> = ({
@@ -47,6 +48,10 @@ const TextInput: React.FC<InputProps> = ({
         }`}
         {...field}
         {...props}
+        onChange={(e) => {
+          //custom code as necessary
+          field.onChange(e);
+        }}
       />
       {meta.touched && meta.error ? (
         <div className={styles['input--error']}>{meta.error}</div>

@@ -12,6 +12,7 @@ const Agent: React.FC<IAgentProps> = ({ index }) => {
           <TextInput
             label="First Name"
             name={`agents.${index}.firstName`}
+            id={`agents.${index}.firstName`}
             type="text"
             placeholder="First Name"
             inputCssClass="input-control"
