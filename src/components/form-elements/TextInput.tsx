@@ -19,7 +19,6 @@ interface InputProps {
   inputCssClass?: string;
   labelCssClass?: string;
   min?: number;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 const TextInput: React.FC<InputProps> = ({
