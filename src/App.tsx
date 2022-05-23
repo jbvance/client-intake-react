@@ -1,10 +1,10 @@
-import { createContext, useState, Dispatch, SetStateAction } from 'react';
+import { createContext, useState } from 'react';
 import './App.css';
 import MultiStepForm from './components/MultiStepForm';
 export const FormContext = createContext({
   activeStepIndex: 0,
   setActiveStepIndex: (prevState: number) => {},
-  steps: ['client-info', 'executor'],
+  steps: ['client-info', 'children', 'dpoa']
 });
 
 function App() {
