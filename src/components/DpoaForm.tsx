@@ -117,56 +117,68 @@ const DpoaForm: React.FC<IDpoaProps> = (props) => {
                   property.
                 </Checkbox>
               </div>
-              <FieldArray
-                name="agents"
-                render={(arrayHelpers) => {
-                  const AgentArrayErrors: JSX.Element =
-                    typeof formProps.errors.agents === 'string' ? (
-                      <Alert
-                        variant="danger"
-                        message={formProps.errors.agents}
-                      />
-                    ) : (
-                      <></>
-                    );
-                  return (
-                    <div>
-                      <div>
-                        <Button
-                          type="button"
-                          onClick={() => arrayHelpers.push({ ...newAgent })}
-                        >
-                          Add an Agent
-                          <FaPlusCircle
-                            style={{
-                              margin: '0 5px',
-                              verticalAlign: 'baseline',
-                            }}
-                          />
-                        </Button>
-                      </div>
-                      {formProps.values.agents.map((agent, index) => (
-                        /* Start of individual agent */
-                        <div key={index} className="person-info-container">
-                          <Agent index={index} />
-                          <div>
-                            <Button
-                              onClick={() => arrayHelpers.remove(index)}
-                              type="button"
-                              danger
-                            >
-                              Delete
-                            </Button>
-                          </div>
-                        </div>
-
-                        /* End individual agent */
-                      ))}
-                      {AgentArrayErrors}
-                    </div>
-                  );
+              <div
+                className="input-group"
+                style={{
+                  border: '1px solid gray',
+                  padding: '0px 2px 10px 10px',
                 }}
-              />
+              >
+                <h3>
+                  Add one or more agents below. The agents will serve in the
+                  order listed.
+                </h3>
+                <FieldArray
+                  name="agents"
+                  render={(arrayHelpers) => {
+                    const AgentArrayErrors: JSX.Element =
+                      typeof formProps.errors.agents === 'string' ? (
+                        <Alert
+                          variant="danger"
+                          message={formProps.errors.agents}
+                        />
+                      ) : (
+                        <></>
+                      );
+                    return (
+                      <div>
+                        <div>
+                          <Button
+                            type="button"
+                            onClick={() => arrayHelpers.push({ ...newAgent })}
+                          >
+                            Add an Agent
+                            <FaPlusCircle
+                              style={{
+                                margin: '0 5px',
+                                verticalAlign: 'baseline',
+                              }}
+                            />
+                          </Button>
+                        </div>
+                        {formProps.values.agents.map((agent, index) => (
+                          /* Start of individual agent */
+                          <div key={index} className="person-info-container">
+                            <Agent index={index} />
+                            <div>
+                              <Button
+                                onClick={() => arrayHelpers.remove(index)}
+                                type="button"
+                                danger
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          </div>
+
+                          /* End individual agent */
+                        ))}
+                        {AgentArrayErrors}
+                      </div>
+                    );
+                  }}
+                />
+              </div>
             </Form>
           );
         }}

@@ -12,7 +12,8 @@
 }
 
 .button:focus {
-  outline: none;
+  outline-style: solid;
+  outline-color: blue;
 }
 
 .button:hover,

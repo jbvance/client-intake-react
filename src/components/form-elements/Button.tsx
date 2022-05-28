@@ -6,6 +6,7 @@ import './Button.css';
 interface IButtonProps {
   children: any;
   type: 'button' | 'submit' | 'reset' | 'formik-submit' | undefined;
+  tabIndex?: number;
   danger?: boolean;
   disabled?: boolean;
   href?: string;
@@ -51,6 +52,7 @@ const Button = (props: IButtonProps) => {
         disabled={props.disabled}
         value={props.children}
         form={props.form}
+        tabIndex={props.tabIndex || 0}
       />
     );
   }
@@ -62,6 +64,7 @@ const Button = (props: IButtonProps) => {
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}
+      tabIndex={props.tabIndex || 0}
     >
       {props.children}
     </button>

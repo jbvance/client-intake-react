@@ -20,21 +20,21 @@ const Footer: React.FC<IFooterProps> = (props: any) => {
 
   return (
     <div className={styles.footer}>
-      <div className={styles['footer-item']}>
-        {!isFirst && (
-          <Button
-            type="button"
-            onClick={() => setActiveStepIndex(activeStepIndex - 1)}
-          >
-            Back
-          </Button>
-        )}
-      </div>
-      <div className={styles['footer-item']}>
-        <Button type="formik-submit" form={props.id}>
-          {isFirst ? 'Next' : isLast ? 'Submit' : 'Next'}
+      {/* <div tabIndex={0} className={styles['footer-item']}> */}
+      {!isFirst && (
+        <Button
+          type="button"
+          onClick={() => setActiveStepIndex(activeStepIndex - 1)}
+        >
+          Back
         </Button>
-      </div>
+      )}
+      {/* </div> */}
+      {/* <div tabIndex={0} className={styles['footer-item']}> */}
+      <Button type="formik-submit" form={props.id}>
+        {isFirst ? 'Next' : isLast ? 'Submit' : 'Next'}
+      </Button>
+      {/* </div> */}
     </div>
   );
 };

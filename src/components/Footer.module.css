@@ -7,3 +7,7 @@
 .footer-item {
   margin: 10px;
 }
+
+.footer-item button {
+  width: 100%;
+}
