@@ -13,13 +13,12 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userInput = e.target.value;
-
     // Filter our suggestions that don't contain the user's input
     const unLinked = suggestions.filter(
       (suggestion) =>
         suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
-
+    console.log(unLinked);
     setInput(e.target.value);
     setFilteredSuggestions(unLinked);
     setActiveSuggestionIndex(0);
@@ -36,7 +35,8 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     // User pressed the enter key
-    if (e.keyCode === 13) {
+    //if (e.keyCode === 13) {
+    if (['Enter', 'NumpadEnter'].includes(e.key)) {
       setInput(filteredSuggestions[activeSuggestionIndex]);
       setActiveSuggestionIndex(0);
       setShowSuggestions(false);

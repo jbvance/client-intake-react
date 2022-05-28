@@ -1,3 +1,4 @@
+import AutoComplete from './form-elements/AutoComplete';
 import TextInput from './form-elements/TextInput';
 
 interface IAgentProps {
@@ -7,6 +8,9 @@ interface IAgentProps {
 const Agent: React.FC<IAgentProps> = ({ index }) => {
   return (
     <>
+      <div>
+        <AutoComplete suggestions={['react', 'residue', 'jason', 'mindy']} />
+      </div>
       <div className="form-group">
         <div className="input-group">
           <TextInput
