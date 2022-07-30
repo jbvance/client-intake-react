@@ -83,9 +83,7 @@ const DpoaForm: React.FC<IDpoaProps> = (props) => {
         }}
       >
         {(formProps) => {
-          //console.log(formProps);
           //console.log(initialState);
-
           return (
             <Form id={formId}>
               <div
@@ -132,7 +130,8 @@ const DpoaForm: React.FC<IDpoaProps> = (props) => {
                   name="agents"
                   render={(arrayHelpers) => {
                     const AgentArrayErrors: JSX.Element =
-                      typeof formProps.errors.agents === 'string' ? (
+                      typeof formProps.errors.agents === 'string' &&
+                      formProps.getFieldMeta('agents').touched ? (
                         <Alert
                           variant="danger"
                           message={formProps.errors.agents}
