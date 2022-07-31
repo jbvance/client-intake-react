@@ -1,15 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Formik, useFormikContext, Form } from 'formik';
 import * as Yup from 'yup';
 import TextInput from './form-elements/TextInput';
 import Button from './form-elements/Button';
+import { useAxios } from '../hooks/useAxios';
+import { AuthContext } from '../context/authContext';
 import classes from './AuthForm.module.css';
 
 const AuthForm = (): JSX.Element => {
-  const [login, setLogin] = useState(true);
+  const [loginMode, setLoginMode] = useState(true);
+  const authCtx = useContext(AuthContext);
+
   const initialState = {
     email: '',
     password: '',
+  };
+
+  const { axiosLoading, axiosError, response, fetchData } = useAxios();
+
+  useEffect(() => {
+    if (response && response.authToken) {
+      console.log('RESPONSE', response);
+      console.log(authCtx);
+      authCtx.login &&
+        authCtx.login(response.user, response.authToken, undefined);
+      console.log('DONE LOGGING IN');
+    }
+  }, [response]);
+
+  const loginOrSignup = async (
+    loginMode: boolean,
+    values: { email: string; password: string }
+  ) => {
+    if (loginMode) {
+      try {
+        await fetchData({
+          url: `/auth/login`,
+          method: 'POST',
+          data: { ...values },
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   return (
@@ -27,12 +60,12 @@ const AuthForm = (): JSX.Element => {
             .required('Password is required'),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('VALUES', values);
+          loginOrSignup(loginMode, values);
         }}
       >
         <div className={`container ${classes['login-form']}`}>
           <h2 className={classes['login-header']}>
-            {login ? 'Login' : 'Sign Up'}
+            {loginMode ? 'Login' : 'Sign Up'}
           </h2>
           <Form>
             <div className="form-group">
@@ -57,24 +90,24 @@ const AuthForm = (): JSX.Element => {
                 />
               </div>
             </div>
-            {login && (
+            {loginMode && (
               <div
                 className={classes['login-status']}
-                onClick={() => setLogin((login) => !login)}
+                onClick={() => setLoginMode((loginMode) => !loginMode)}
               >
                 Don't have an account? Sign up instead
               </div>
             )}
-            {!login && (
+            {!loginMode && (
               <div
                 className={classes['login-status']}
-                onClick={() => setLogin((login) => !login)}
+                onClick={() => setLoginMode((login) => !loginMode)}
               >
                 Already have an account? Click here to log in
               </div>
             )}
             <div className="form-group">
-              <Button type="submit">{login ? 'Login' : 'Sign Up'}</Button>
+              <Button type="submit">{loginMode ? 'Login' : 'Sign Up'}</Button>
             </div>
           </Form>
         </div>

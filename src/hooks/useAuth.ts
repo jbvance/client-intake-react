@@ -3,23 +3,28 @@ import { useState, useCallback, useEffect } from 'react';
 let logoutTimer: NodeJS.Timeout;
 
 export const useAuth = () => {
-  const [token, setToken] = useState<string | null>('');
+  console.log('IN USEAUTH');
+  const [token, setToken] = useState<string | null>(null);
   const [tokenExpirationDate, setTokenExpirationDate] = useState<Date | null>(
     null
   );
-  const [userId, setUserId] = useState<string | null>('');
+  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
 
   const login = useCallback(
-    (uid: string, token: string, expirationDate: Date) => {
+    (
+      user: { id: string; email: string },
+      token: string,
+      expirationDate?: Date | undefined
+    ) => {
       setToken(token);
-      setUserId(uid);
+      setUser(user);
       const tokenExpirationDate =
         expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
       setTokenExpirationDate(tokenExpirationDate);
       localStorage.setItem(
         'userData',
         JSON.stringify({
-          userId: uid,
+          user,
           token: token,
           expiration: tokenExpirationDate.toISOString(),
         })
@@ -31,7 +36,7 @@ export const useAuth = () => {
   const logout = useCallback(() => {
     setToken(null);
     setTokenExpirationDate(null);
-    setUserId(null);
+    setUser(null);
     localStorage.removeItem('userData');
   }, []);
 
@@ -46,11 +51,9 @@ export const useAuth = () => {
   }, [token, logout, tokenExpirationDate]);
 
   useEffect(() => {
-    const storedData: {
-      token: string;
-      expiration: Date;
-      userId: string;
-    } | null = JSON.parse(localStorage.getItem('userData') || '') || null;
+    const storedData = localStorage.getItem('userData')
+      ? JSON.parse(localStorage.getItem('userData') || '')
+      : null;
     if (
       storedData &&
       storedData.token &&
@@ -64,5 +67,5 @@ export const useAuth = () => {
     }
   }, [login]);
 
-  return { token, login, logout, userId };
+  return { token, login, logout, user };
 };

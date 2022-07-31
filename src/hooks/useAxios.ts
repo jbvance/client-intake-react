@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 
-axios.defaults.baseURL = 'http://____________';
+axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
 
-export const useAxios = (axiosParams: any) => {
-  const [response, setResponse] = useState(undefined);
-  const [error, setError] = useState('');
+export const useAxios = () => {
+  const [response, setResponse] = useState<any>(undefined);
+  const [axiosError, setAxiosError] = useState('');
   const [axiosLoading, setAxiosLoading] = useState(false);
 
   const fetchData = async (params: any) => {
@@ -14,15 +14,12 @@ export const useAxios = (axiosParams: any) => {
       const result = await axios.request(params);
       setResponse(result.data);
     } catch (error: any) {
-      setError(error);
+      console.log('ERROR', error);
+      setAxiosError(error);
     } finally {
       setAxiosLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchData(axiosParams);
-  }, []); // execute once only
-
-  return { response, error, axiosLoading };
+  return { fetchData, response, axiosError, axiosLoading };
 };
