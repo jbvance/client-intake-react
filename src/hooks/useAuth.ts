@@ -3,7 +3,6 @@ import { useState, useCallback, useEffect } from 'react';
 let logoutTimer: NodeJS.Timeout;
 
 export const useAuth = () => {
-  console.log('IN USEAUTH');
   const [token, setToken] = useState<string | null>(null);
   const [tokenExpirationDate, setTokenExpirationDate] = useState<Date | null>(
     null
