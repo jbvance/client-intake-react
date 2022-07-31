@@ -6,10 +6,13 @@ import Button from './form-elements/Button';
 import { useAxios } from '../hooks/useAxios';
 import { AuthContext } from '../context/authContext';
 import classes from './AuthForm.module.css';
+import LoadingSpinner from './ui-elements/LoadingSpinner';
+import Alert from './ui-elements/Alert';
 
 const AuthForm = (): JSX.Element => {
   const [loginMode, setLoginMode] = useState(true);
   const authCtx = useContext(AuthContext);
+  const { login } = authCtx;
 
   const initialState = {
     email: '',
@@ -21,12 +24,10 @@ const AuthForm = (): JSX.Element => {
   useEffect(() => {
     if (response && response.authToken) {
       console.log('RESPONSE', response);
-      console.log(authCtx);
-      authCtx.login &&
-        authCtx.login(response.user, response.authToken, undefined);
+      login && login(response.user, response.authToken, undefined);
       console.log('DONE LOGGING IN');
     }
-  }, [response]);
+  }, [response, login]);
 
   const loginOrSignup = async (
     loginMode: boolean,
@@ -44,6 +45,10 @@ const AuthForm = (): JSX.Element => {
       }
     }
   };
+
+  if (axiosLoading) {
+    return <LoadingSpinner asOverlay />;
+  }
 
   return (
     <>
@@ -112,6 +117,7 @@ const AuthForm = (): JSX.Element => {
           </Form>
         </div>
       </Formik>
+      {axiosError && <Alert message="Unable to log you in" variant="danger" />}
     </>
   );
 };
