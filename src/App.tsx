@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './App.css';
-import MultiStepForm from './components/MultiStepForm';
+import MultiFormPage from './pages/MultiFormpage';
 import AuthForm from './components/AuthForm';
 import store from './store';
 import { AuthContext } from './context/authContext';
@@ -58,7 +58,7 @@ function App() {
               <Routes>
                 <Route
                   path="/"
-                  element={token ? <MultiStepForm /> : <AuthForm />}
+                  element={token ? <MultiFormPage /> : <AuthForm />}
                 />
                 <Route path="/auth" element={<AuthForm />} />
               </Routes>
