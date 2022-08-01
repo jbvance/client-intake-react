@@ -7,7 +7,7 @@ import Select from './form-elements/Select';
 import { RootState } from '../store';
 import { IClientInfo } from '../store/client-info-slice';
 import StepHeader from './StepHeader';
-import { FormContext } from '../App';
+import { FormContext } from '../context/formContext';
 import { AppDispatch } from '../store';
 import { updateClientInfo } from '../store/client-info-slice';
 
@@ -37,7 +37,7 @@ const ClientInfo = (props: any) => {
       </h3>
       <Formik
         initialValues={{
-          ...initialState
+          ...initialState,
         }}
         validationSchema={Yup.object({
           firstName: Yup.string()
@@ -68,28 +68,28 @@ const ClientInfo = (props: any) => {
             .oneOf(['Y', 'N']),
           spouseFirstName: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema.required('Spouse first name is required')
+            then: (schema) => schema.required('Spouse first name is required'),
           }),
           spouseMiddleName: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema
+            then: (schema) => schema,
           }),
           spouseLastName: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema.required('Spouse last name is required')
+            then: (schema) => schema.required('Spouse last name is required'),
           }),
           spouseEmail: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema
+            then: (schema) => schema,
           }),
           spouseOccupation: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema
+            then: (schema) => schema,
           }),
           spouseEmployer: Yup.string().when('married', {
             is: 'Y',
-            then: (schema) => schema
-          })
+            then: (schema) => schema,
+          }),
         })}
         onSubmit={(values, { setSubmitting }) => {
           //console.log('VALUES', values);

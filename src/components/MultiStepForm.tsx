@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import ClientInfo from './ClientInfo';
-import { FormContext } from '../App';
+import { FormContext } from '../context/formContext';
 import Footer from './Footer';
 import ExecutorForm from './ExecutorForm';
 import ChildrenForm from './ChildrenForm';
@@ -21,7 +21,7 @@ const MultiStepForm = () => {
   ];
 
   return (
-    <div>
+    <div className="container">
       {stepComponents[activeStepIndex]}
       <Footer id={steps[activeStepIndex]} {...props} />
     </div>

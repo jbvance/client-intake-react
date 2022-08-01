@@ -8,11 +8,7 @@ import store from './store';
 import { AuthContext } from './context/authContext';
 import { useAuth } from './hooks/useAuth';
 
-export const FormContext = createContext({
-  activeStepIndex: 0,
-  setActiveStepIndex: (prevState: number) => {},
-  steps: ['client-info', 'children', 'dpoa'],
-});
+import { FormContext } from './context/formContext';
 
 type ChildrenProps = {
   children: JSX.Element;
@@ -34,8 +30,6 @@ export const ProtectedRoute = ({
 function App() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const { token, user, login, logout } = useAuth();
-  console.log('USER', user);
-  console.log('TOKEN', token);
   const steps = ['client-info', 'children', 'dpoa'];
 
   //console.log('IN APP', token);

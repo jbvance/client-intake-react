@@ -8,7 +8,7 @@ import StepHeader from './StepHeader';
 import Checkbox from './form-elements/Checkbox';
 import { RootState } from '../store';
 import { dpoaActions, setDpoaValues } from '../store/dpoa-slice';
-import { FormContext } from '../App';
+import { FormContext } from '../context/formContext';
 import { IDpoa } from '../store/dpoa-slice';
 import Button from './form-elements/Button';
 import { AppDispatch } from '../store';

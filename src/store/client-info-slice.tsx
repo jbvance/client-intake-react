@@ -65,7 +65,7 @@ const initialClientInfo: IClientInfo = {
   spouseLastName: '',
   spouseEmail: '',
   spouseOccupation: '',
-  spouseEmployer: ''
+  spouseEmployer: '',
 };
 
 const initialState = { ...initialClientInfo };
@@ -86,7 +86,7 @@ const clientInfoSlice = createSlice({
       }
       //console.log(newState);
       Object.assign(state, newState);
-    }
+    },
     // addFavorite(state, action) {
     //   const newRecipe = action.payload;
     //   const existingFavorite = state.recipes.find(
@@ -111,7 +111,7 @@ const clientInfoSlice = createSlice({
     // setFavorites(state, action) {
     //   state.recipes = action.payload;
     // },
-  }
+  },
 });
 
 export const updateClientInfo = (clientInfo: IClientInfo) => {

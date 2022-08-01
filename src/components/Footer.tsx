@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Button from './form-elements/Button';
 import styles from './Footer.module.css';
-import { FormContext } from '../App';
+import { FormContext } from '../context/formContext';
 
 interface IFooterProps {
   prev?: () => void;
@@ -16,7 +16,7 @@ const Footer: React.FC<IFooterProps> = (props: any) => {
   const isLast = activeStepIndex === steps.length - 1;
   const isFirst = activeStepIndex === 0;
 
-  console.log(steps);
+  //console.log(steps);
 
   return (
     <div className={styles.footer}>

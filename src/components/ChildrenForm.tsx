@@ -9,7 +9,7 @@ import TextInput from './form-elements/TextInput';
 import Select from './form-elements/Select';
 import { RootState } from '../store';
 import { childrenActions, setChildren } from '../store/children-slice';
-import { FormContext } from '../App';
+import { FormContext } from '../context/formContext';
 import IChild from '../store/children-slice';
 import Button from './form-elements/Button';
 import { AppDispatch } from '../store';
