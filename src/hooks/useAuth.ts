@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+//import jwt_decode from 'jwt-decode';
 
 let logoutTimer: NodeJS.Timeout;
 
@@ -58,11 +59,7 @@ export const useAuth = () => {
       storedData.token &&
       new Date(storedData.expiration) > new Date()
     ) {
-      login(
-        storedData.userId,
-        storedData.token,
-        new Date(storedData.expiration)
-      );
+      login(storedData.user, storedData.token, new Date(storedData.expiration));
     }
   }, [login]);
 
